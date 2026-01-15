@@ -5,6 +5,37 @@ import axios from "axios";
 const API_BASE_URL = 'https://coffeehousehub-production.up.railway.app';
 import { message } from 'antd'; // Sử dụng message của antd để thông báo đẹp hơn
 
+// Import backup data
+import backupProducts from '../../data/backupProducts.json';
+import backupCafes from '../../data/backupCafes.json';
+
+// DEV ONLY: Bật login giả để test cart mà không cần backend auth
+const FORCE_LOGIN = true;
+const DEV_USER = {
+  id: 0,
+  fullname: "Test User",
+  email: "test@coffeehouse.local",
+  role: "user",
+};
+
+const readDevCart = () => {
+  try {
+    const saved = localStorage.getItem('dev_cart');
+    return saved ? JSON.parse(saved) : [];
+  } catch (e) {
+    console.warn("Không thể đọc dev_cart:", e);
+    return [];
+  }
+};
+
+const writeDevCart = (items) => {
+  try {
+    localStorage.setItem('dev_cart', JSON.stringify(items));
+  } catch (e) {
+    console.warn("Không thể lưu dev_cart:", e);
+  }
+};
+
 export const ShopContext = createContext(null);
 
 export const ShopProvider = ({ children }) => {
@@ -47,6 +78,12 @@ export const ShopProvider = ({ children }) => {
   const checkUserStatus = useCallback(async () => {
     const token = localStorage.getItem('token');
     setIsAuthLoading(true);
+    if (FORCE_LOGIN) {
+      localStorage.setItem('token', 'dev-token');
+      updateUser(DEV_USER);
+      setIsAuthLoading(false);
+      return;
+    }
     if (token) {
       try {
         const res = await axios.get(`${API_BASE_URL}/user`, {
@@ -75,17 +112,72 @@ export const ShopProvider = ({ children }) => {
 
   const fetchProducts = useCallback(() => {
     axios.get(`${API_BASE_URL}/products`)
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.error("Lỗi khi tải sản phẩm:", err));
+      .then((res) => {
+        setProducts(res.data);
+        // Lưu dữ liệu thành công vào localStorage để dùng làm backup
+        try {
+          localStorage.setItem('backup_products', JSON.stringify(res.data));
+        } catch (e) {
+          console.warn("Không thể lưu backup products vào localStorage:", e);
+        }
+      })
+      .catch((err) => {
+        console.error("Lỗi khi tải sản phẩm từ API, sử dụng dữ liệu backup:", err);
+        // Thử lấy từ localStorage trước, nếu không có thì dùng backup mặc định
+        try {
+          const savedBackup = localStorage.getItem('backup_products');
+          if (savedBackup) {
+            setProducts(JSON.parse(savedBackup));
+            console.log("Đã sử dụng dữ liệu backup từ localStorage");
+          } else {
+            setProducts(backupProducts);
+            console.log("Đã sử dụng dữ liệu backup mặc định");
+          }
+        } catch (e) {
+          setProducts(backupProducts);
+          console.log("Đã sử dụng dữ liệu backup mặc định (lỗi localStorage)");
+        }
+        message.warning("Không thể kết nối đến server. Đang hiển thị dữ liệu backup.");
+      });
   }, []);
 
   const fetchCafes = useCallback(() => {
     axios.get(`${API_BASE_URL}/cafe`)
-      .then((res) => setCafes(res.data))
-      .catch((err) => console.error("Lỗi khi tải menu cafe:", err));
+      .then((res) => {
+        setCafes(res.data);
+        // Lưu dữ liệu thành công vào localStorage để dùng làm backup
+        try {
+          localStorage.setItem('backup_cafes', JSON.stringify(res.data));
+        } catch (e) {
+          console.warn("Không thể lưu backup cafes vào localStorage:", e);
+        }
+      })
+      .catch((err) => {
+        console.error("Lỗi khi tải menu cafe từ API, sử dụng dữ liệu backup:", err);
+        // Thử lấy từ localStorage trước, nếu không có thì dùng backup mặc định
+        try {
+          const savedBackup = localStorage.getItem('backup_cafes');
+          if (savedBackup) {
+            setCafes(JSON.parse(savedBackup));
+            console.log("Đã sử dụng dữ liệu backup từ localStorage");
+          } else {
+            setCafes(backupCafes);
+            console.log("Đã sử dụng dữ liệu backup mặc định");
+          }
+        } catch (e) {
+          setCafes(backupCafes);
+          console.log("Đã sử dụng dữ liệu backup mặc định (lỗi localStorage)");
+        }
+        message.warning("Không thể kết nối đến server. Đang hiển thị dữ liệu backup.");
+      });
   }, []);
   
   const fetchCart = useCallback(async () => {
+    if (FORCE_LOGIN) {
+      const devCart = readDevCart();
+      setCart(devCart);
+      return devCart;
+    }
     const token = localStorage.getItem('token');
     if (!token) return [];
 
@@ -144,6 +236,31 @@ export const ShopProvider = ({ children }) => {
   // =================================================================
   
   const addToCart = (productId, type, quantity = 1, image = null) => {
+    if (FORCE_LOGIN) {
+      const devCart = readDevCart();
+      const sourceItem = type === "cafe"
+        ? cafes.find((item) => item.id === productId)
+        : products.find((item) => item.id === productId);
+      const cartid = `dev-${type}-${productId}`;
+      const existing = devCart.find((item) => item.cartid === cartid);
+      if (existing) {
+        existing.quantity += quantity;
+      } else {
+        devCart.push({
+          cartid,
+          productId,
+          type,
+          name: sourceItem?.name || "Sản phẩm",
+          price: Number(sourceItem?.price || 0),
+          quantity,
+          image: image || sourceItem?.image || sourceItem?.img || null,
+        });
+      }
+      writeDevCart(devCart);
+      setCart([...devCart]);
+      message.success("Đã thêm vào giỏ hàng!");
+      return;
+    }
     const token = localStorage.getItem('token');
     if (!token) {
       message.warning("Vui lòng đăng nhập để thêm vào giỏ hàng");
@@ -161,6 +278,19 @@ export const ShopProvider = ({ children }) => {
   };
 
   const updateCartQuantity = (cartId, quantity) => {
+    if (FORCE_LOGIN) {
+      if (quantity <= 0) {
+        removeFromCart(cartId);
+        return;
+      }
+      const devCart = readDevCart();
+      const updated = devCart.map((item) =>
+        item.cartid === cartId ? { ...item, quantity } : item
+      );
+      writeDevCart(updated);
+      setCart(updated);
+      return;
+    }
     const token = localStorage.getItem('token');
     if (quantity <= 0) {
       removeFromCart(cartId);
@@ -174,6 +304,14 @@ export const ShopProvider = ({ children }) => {
   };
 
   const removeFromCart = (cartId) => {
+    if (FORCE_LOGIN) {
+      const devCart = readDevCart();
+      const updated = devCart.filter((item) => item.cartid !== cartId);
+      writeDevCart(updated);
+      setCart(updated);
+      message.info("Đã xóa sản phẩm khỏi giỏ hàng.");
+      return;
+    }
     const token = localStorage.getItem('token');
     axios.delete(`${API_BASE_URL}/cart/${cartId}`, { 
       headers: { Authorization: `Bearer ${token}` }

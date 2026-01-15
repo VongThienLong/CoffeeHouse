@@ -2,6 +2,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BlogSidebar from "@/components/page/BlogSidebar";
+import backupNews from "../../data/backupNews.json";
+
+const API_BASE_URL = "https://coffeehousehub-production.up.railway.app";
 
 export default function NewspaperDetail() {
   const { id } = useParams();
@@ -11,9 +14,20 @@ export default function NewspaperDetail() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://coffeehousehub-production.up.railway.app/news/${id}`)
+      .get(`${API_BASE_URL}/news/${id}`)
       .then((res) => setNews(res.data))
-      .catch(() => setNews(null))
+      .catch(() => {
+        // Fallback giống ProductDetail: dùng cache/local backup
+        try {
+          const savedBackup = localStorage.getItem("backup_news");
+          const newsList = savedBackup ? JSON.parse(savedBackup) : backupNews;
+          const found = newsList.find((item) => item.id === parseInt(id, 10));
+          setNews(found || null);
+        } catch (e) {
+          const found = backupNews.find((item) => item.id === parseInt(id, 10));
+          setNews(found || null);
+        }
+      })
       .finally(() => setLoading(false));
   }, [id]);
 

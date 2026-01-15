@@ -6,6 +6,7 @@ import axios from "axios";
 
 const API_BASE_URL = 'https://coffeehousehub-production.up.railway.app';
 import BlogSidebar from "@/components/page/BlogSidebar";
+import backupNews from "../../data/backupNews.json";
 
 import ParallaxBG from "@/components/img/Heros/slider4.jpeg";
 import "@/components/css/Parallax.css";
@@ -15,8 +16,22 @@ export default function AllNewsPage() {
 
   useEffect(() => {
     axios.get(`${API_BASE_URL}/news`)
-      .then(res => setNews(res.data))
-      .catch(() => setNews([]));
+      .then(res => {
+        setNews(res.data);
+        try {
+          localStorage.setItem("backup_news", JSON.stringify(res.data));
+        } catch (e) {
+          console.warn("Không thể lưu backup news:", e);
+        }
+      })
+      .catch(() => {
+        try {
+          const savedBackup = localStorage.getItem("backup_news");
+          setNews(savedBackup ? JSON.parse(savedBackup) : backupNews);
+        } catch (e) {
+          setNews(backupNews);
+        }
+      });
   }, []);
 
   return (
@@ -59,7 +74,7 @@ export default function AllNewsPage() {
                   <div className="flex-1 flex flex-col justify-between mt-6 md:mt-0">
                     <div>
                       <p className="text-sm italic text-[#b48a64] mb-2">
-                        {item.category} / {new Date(item.date).toLocaleDateString("vi-VN")}
+                        {item.category} - {new Date(item.date).toLocaleDateString("vi-VN")}
                       </p>
                       <h3 className="font-bold text-xl md:text-2xl mb-3 text-[#4A372D] hover:text-[#D9A074] transition-colors">
                          <Link to={`/newspaper/${item.id}`}>{item.title}</Link>

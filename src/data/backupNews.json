@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Cách Pha Cà Phê Phin Truyền Thống Đúng Chuẩn",
+    "description": "Hướng dẫn chi tiết cách pha cà phê phin truyền thống Việt Nam để có được ly cà phê thơm ngon, đậm đà nhất.",
+    "image": "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=600",
+    "category": "Hướng dẫn",
+    "date": "2024-01-15",
+    "content": "<p>Chuẩn bị phin sạch, nước nóng 92-96°C và 20-25g cà phê.</p><p>Ủ cà phê 30 giây với một lượng nước nhỏ, sau đó rót đều để cà phê nhỏ giọt.</p><p>Thưởng thức cùng sữa đặc hoặc uống đen tùy khẩu vị.</p>"
+  },
+  {
+    "id": 2,
+    "title": "Khám Phá Hương Vị Cà Phê Robusta và Arabica",
+    "description": "Tìm hiểu sự khác biệt giữa hai loại cà phê phổ biến nhất thế giới và cách chọn loại phù hợp với khẩu vị của bạn.",
+    "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600",
+    "category": "Kiến thức",
+    "date": "2024-01-10",
+    "content": "<p>Arabica thơm nhẹ, chua thanh; Robusta đậm, hậu vị mạnh và caffeine cao hơn.</p><p>Nếu bạn thích vị mạnh, hãy chọn Robusta hoặc blend; thích hương thơm dịu, hãy chọn Arabica.</p>"
+  },
+  {
+    "id": 3,
+    "title": "Lợi Ích Sức Khỏe Từ Việc Uống Cà Phê Điều Độ",
+    "description": "Cà phê không chỉ là thức uống thơm ngon mà còn mang lại nhiều lợi ích sức khỏe khi được sử dụng đúng cách và điều độ.",
+    "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600",
+    "category": "Sức khỏe",
+    "date": "2024-01-05",
+    "content": "<p>Uống cà phê điều độ giúp cải thiện sự tỉnh táo và tập trung.</p><p>Tránh uống quá muộn để không ảnh hưởng giấc ngủ.</p>"
+  },
+  {
+    "id": 4,
+    "title": "Bí Quyết Chọn Hạt Cà Phê Rang Xay Chất Lượng",
+    "description": "Những tiêu chí đơn giản giúp bạn chọn được hạt cà phê rang xay ngon, sạch và phù hợp với khẩu vị.",
+    "image": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600",
+    "category": "Mẹo hay",
+    "date": "2023-12-28",
+    "content": "<p>Ưu tiên hạt rang mới trong vòng 2-4 tuần, màu sắc đồng đều.</p><p>Chọn mức rang phù hợp: rang vừa cho hương thơm cân bằng, rang đậm cho vị mạnh.</p>"
+  },
+  {
+    "id": 5,
+    "title": "Cold Brew: Xu Hướng Cà Phê Mát Lạnh Của Mùa Hè",
+    "description": "Cold Brew đang trở thành lựa chọn hàng đầu trong những ngày nắng nóng nhờ vị thanh mát và hương thơm dịu.",
+    "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600",
+    "category": "Xu hướng",
+    "date": "2023-12-20",
+    "content": "<p>Cold Brew được ủ lạnh 12-18 giờ, ít chua và dịu hơn so với pha nóng.</p><p>Dùng với đá, sữa hoặc syrup để tăng hương vị.</p>"
+  },
+  {
+    "id": 6,
+    "title": "Cà Phê Sữa Đá: Biểu Tượng Văn Hóa Ẩm Thực Việt",
+    "description": "Tìm hiểu câu chuyện và cách pha chuẩn vị cà phê sữa đá – thức uống quen thuộc của người Việt.",
+    "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600",
+    "category": "Văn hóa",
+    "date": "2023-12-15",
+    "content": "<p>Cà phê sữa đá là sự kết hợp giữa cà phê phin đậm đà và sữa đặc ngọt.</p><p>Khuấy đều, thêm đá viên và thưởng thức khi lạnh.</p>"
+  },
+  {
+    "id": 7,
+    "title": "Hướng Dẫn Bảo Quản Cà Phê Đúng Cách",
+    "description": "Bảo quản cà phê đúng cách giúp giữ trọn hương vị và độ tươi lâu hơn cho mỗi lần pha.",
+    "image": "https://images.unsplash.com/photo-1507133750040-4a8f57021571?w=600",
+    "category": "Hướng dẫn",
+    "date": "2023-12-08",
+    "content": "<p>Trữ cà phê trong hũ kín, tránh ánh sáng và độ ẩm.</p><p>Không để cà phê gần gia vị mạnh để tránh ám mùi.</p>"
+  },
+  {
+    "id": 8,
+    "title": "Cách Pha Latte Art Cơ Bản Tại Nhà",
+    "description": "Bạn có thể tự tạo hình latte art cơ bản với vài dụng cụ đơn giản và một chút luyện tập.",
+    "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600",
+    "category": "Kỹ năng",
+    "date": "2023-12-01",
+    "content": "<p>Đánh sữa mịn, tạo microfoam rồi đổ đều tay vào espresso.</p><p>Bắt đầu với hình trái tim hoặc rosetta cơ bản.</p>"
+  }
+]

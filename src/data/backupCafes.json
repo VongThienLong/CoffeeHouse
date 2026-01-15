@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "name": "Espresso",
+    "price": 35000,
+    "img": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=200",
+    "desc": "Cà phê Espresso đậm đà, thơm ngon"
+  },
+  {
+    "id": 2,
+    "name": "Cappuccino",
+    "price": 45000,
+    "img": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=200",
+    "desc": "Cappuccino với lớp bọt sữa mịn màng"
+  },
+  {
+    "id": 3,
+    "name": "Latte",
+    "price": 50000,
+    "img": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200",
+    "desc": "Latte thơm ngon với sữa tươi"
+  },
+  {
+    "id": 4,
+    "name": "Americano",
+    "price": 40000,
+    "img": "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=200",
+    "desc": "Americano đậm đà, pha loãng với nước nóng"
+  },
+  {
+    "id": 5,
+    "name": "Mocha",
+    "price": 55000,
+    "img": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200",
+    "desc": "Mocha với hương vị socola đặc biệt"
+  },
+  {
+    "id": 6,
+    "name": "Macchiato",
+    "price": 42000,
+    "img": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200",
+    "desc": "Macchiato với một chút sữa"
+  },
+  {
+    "id": 7,
+    "name": "Flat White",
+    "price": 48000,
+    "img": "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=200",
+    "desc": "Flat White mịn màng, cân bằng hoàn hảo"
+  },
+  {
+    "id": 8,
+    "name": "Cà Phê Sữa Đá",
+    "price": 30000,
+    "img": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=200",
+    "desc": "Cà phê sữa đá truyền thống Việt Nam"
+  },
+  {
+    "id": 9,
+    "name": "Cà Phê Đen Đá",
+    "price": 25000,
+    "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=200",
+    "desc": "Cà phê đen đá nguyên chất"
+  },
+  {
+    "id": 10,
+    "name": "Cold Brew",
+    "price": 45000,
+    "img": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=200",
+    "desc": "Cold Brew mát lạnh, đậm đà"
+  },
+  {
+    "id": 11,
+    "name": "Frappuccino",
+    "price": 60000,
+    "img": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200",
+    "desc": "Frappuccino mát lạnh, ngọt ngào"
+  },
+  {
+    "id": 12,
+    "name": "Cà Phê Trứng",
+    "price": 40000,
+    "img": "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=200",
+    "desc": "Cà phê trứng đặc biệt Hà Nội"
+  }
+]

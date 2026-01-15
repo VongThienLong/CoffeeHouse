@@ -41,10 +41,10 @@ function Footer() {
           </h4>
           <div className="text-gray-300 text-xl space-y-2">
             <p className="flex items-center">
-              <FaEnvelope className="mr-3 min-w-[20px]" /> info@dhv.edu.vn
+              <FaEnvelope className="mr-3 min-w-[20px]" /> info@vlu.edu.vn
             </p>
             <p className="flex items-center">
-              <FaPhone className="mr-3 min-w-[20px]" /> (+84) 02871001888
+              <FaPhone className="mr-3 min-w-[20px]" /> (+84) 1136547890
             </p>
           </div>
         </div>

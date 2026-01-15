@@ -1,14 +1,40 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import backupNews from "../../data/backupNews.json";
+
+const API_BASE_URL = "https://coffeehousehub-production.up.railway.app";
 
 export default function NewsSection() {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    axios.get("https://coffeehousehub-production.up.railway.app/news")
-      .then(res => setNews(res.data.slice(0, 3)))
-      .catch(() => setNews([]));
+    axios.get(`${API_BASE_URL}/news`)
+      .then(res => {
+        const newsData = res.data.slice(0, 3);
+        setNews(newsData);
+        // Lưu dữ liệu thành công vào localStorage
+        try {
+          localStorage.setItem('backup_news', JSON.stringify(res.data));
+        } catch (e) {
+          console.warn("Không thể lưu backup news:", e);
+        }
+      })
+      .catch(err => {
+        console.error("Lỗi khi tải tin tức từ API, sử dụng dữ liệu backup:", err);
+        // Thử lấy từ localStorage trước, nếu không có thì dùng backup mặc định
+        try {
+          const savedBackup = localStorage.getItem('backup_news');
+          if (savedBackup) {
+            const newsData = JSON.parse(savedBackup).slice(0, 3);
+            setNews(newsData);
+          } else {
+            setNews(backupNews.slice(0, 3));
+          }
+        } catch (e) {
+          setNews(backupNews.slice(0, 3));
+        }
+      });
   }, []);
 
   return (

@@ -9,6 +9,9 @@ import axios from 'axios';
 import { shuffle } from 'lodash';
 import "@/components/css/Parallax.css";
 import ParallaxBG from "@/components/img/Heros/slider4.jpeg";
+import backupProducts from "../../data/backupProducts.json";
+
+const API_BASE_URL = 'https://coffeehousehub-production.up.railway.app';
 
 // Xóa imageMap vì không còn dùng
 // const imageMap = { ... };
@@ -30,11 +33,33 @@ function ProductDetail() {
     
     const fetchProductFromAPI = async () => {
       try {
-        const response = await axios.get(`https://coffeehousehub-production.up.railway.app/products/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/products/${id}`);
         setProduct(response.data);
       } catch (error) {
-        console.error("Lỗi khi lấy chi tiết sản phẩm:", error);
-        navigate('/sanpham');
+        console.error("Lỗi khi lấy chi tiết sản phẩm từ API, thử dùng backup:", error);
+        // Thử tìm sản phẩm trong backup data
+        try {
+          const savedBackup = localStorage.getItem('backup_products');
+          let productsToSearch = savedBackup ? JSON.parse(savedBackup) : backupProducts;
+          const foundProduct = productsToSearch.find(p => p.id === parseInt(id));
+          if (foundProduct) {
+            setProduct(foundProduct);
+            console.log("Đã tìm thấy sản phẩm trong dữ liệu backup");
+          } else {
+            console.error("Không tìm thấy sản phẩm trong backup data");
+            navigate('/sanpham');
+          }
+        } catch (e) {
+          // Thử tìm trong backup mặc định
+          const foundProduct = backupProducts.find(p => p.id === parseInt(id));
+          if (foundProduct) {
+            setProduct(foundProduct);
+            console.log("Đã tìm thấy sản phẩm trong dữ liệu backup mặc định");
+          } else {
+            console.error("Không tìm thấy sản phẩm");
+            navigate('/sanpham');
+          }
+        }
       }
     };
     

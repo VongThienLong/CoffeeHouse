@@ -5,18 +5,43 @@ import { useEffect, useState } from "react";
 // import { S1, S2, S3, S4 } from "../IMG/Shop/";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import backupProducts from "../../data/backupProducts.json";
 
 // Xóa imageMap
 // const imageMap = { ... };
+
+const API_BASE_URL = "https://coffeehousehub-production.up.railway.app";
 
 function ShopSection() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios.get("https://coffeehousehub-production.up.railway.app/products")
-      // .slice(0, 4) đã giới hạn sẵn chỉ lấy 4 sản phẩm
-      .then(res => setItems(res.data.slice(0, 4)))
-      .catch(err => console.error("Lỗi API:", err));
+    axios.get(`${API_BASE_URL}/products`)
+      .then(res => {
+        const products = res.data.slice(0, 4);
+        setItems(products);
+        // Lưu dữ liệu thành công vào localStorage
+        try {
+          localStorage.setItem('backup_products', JSON.stringify(res.data));
+        } catch (e) {
+          console.warn("Không thể lưu backup products:", e);
+        }
+      })
+      .catch(err => {
+        console.error("Lỗi API, sử dụng dữ liệu backup:", err);
+        // Thử lấy từ localStorage trước, nếu không có thì dùng backup mặc định
+        try {
+          const savedBackup = localStorage.getItem('backup_products');
+          if (savedBackup) {
+            const products = JSON.parse(savedBackup).slice(0, 4);
+            setItems(products);
+          } else {
+            setItems(backupProducts.slice(0, 4));
+          }
+        } catch (e) {
+          setItems(backupProducts.slice(0, 4));
+        }
+      });
   }, []);
 
   return (

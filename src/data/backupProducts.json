@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "Cà Phê Arabica Premium",
+    "price": 250000,
+    "original": 300000,
+    "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400",
+    "sale": true,
+    "sku": "CF-ARB-001",
+    "category": "Cà phê hạt",
+    "tags": "arabica, premium, robusta",
+    "short_description": "Cà phê Arabica cao cấp với hương vị đậm đà, thơm ngon",
+    "description": "Cà phê Arabica Premium được chọn lọc từ những hạt cà phê tốt nhất, rang xay theo công nghệ hiện đại. Sản phẩm có hương vị đậm đà, thơm ngon đặc trưng của cà phê Việt Nam."
+  },
+  {
+    "id": 2,
+    "name": "Cà Phê Robusta Đặc Biệt",
+    "price": 180000,
+    "original": null,
+    "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400",
+    "sale": false,
+    "sku": "CF-RBT-002",
+    "category": "Cà phê hạt",
+    "tags": "robusta, đặc biệt",
+    "short_description": "Cà phê Robusta với độ đậm đà cao, phù hợp cho người thích vị mạnh",
+    "description": "Cà phê Robusta Đặc Biệt được chế biến từ những hạt cà phê chất lượng cao, có độ đậm đà và caffeine cao hơn Arabica. Phù hợp cho những người yêu thích vị cà phê mạnh mẽ."
+  },
+  {
+    "id": 3,
+    "name": "Cà Phê Culi Hạt Rang",
+    "price": 320000,
+    "original": 380000,
+    "image": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400",
+    "sale": true,
+    "sku": "CF-CUL-003",
+    "category": "Cà phê hạt",
+    "tags": "culi, rang xay",
+    "short_description": "Cà phê Culi hạt rang nguyên chất, hương vị độc đáo",
+    "description": "Cà phê Culi là loại cà phê đặc biệt với hạt tròn, được rang xay theo phương pháp truyền thống. Sản phẩm có hương vị độc đáo, đậm đà và thơm ngon."
+  },
+  {
+    "id": 4,
+    "name": "Cà Phê Phin Đặc Biệt",
+    "price": 200000,
+    "original": null,
+    "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400",
+    "sale": false,
+    "sku": "CF-PHN-004",
+    "category": "Cà phê phin",
+    "tags": "phin, đặc biệt",
+    "short_description": "Cà phê phin truyền thống, pha chế dễ dàng tại nhà",
+    "description": "Cà phê Phin Đặc Biệt được chế biến đặc biệt để phù hợp với cách pha phin truyền thống. Sản phẩm giữ nguyên hương vị đậm đà, thơm ngon của cà phê Việt Nam."
+  }
+]

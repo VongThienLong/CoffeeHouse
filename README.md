@@ -35,9 +35,16 @@ The site is designed for **speed, scalability, and seamless user experience**.
 
 ---
 
-## 🚀 Live Website
+## 🚀 UI
 
-👉 **[https://coffeehousehub.vercel.app/](https://coffeehousehub.vercel.app/)**
+![Home](screenshots/home.png)
+![Products](screenshots/product.png)
+![Menu](screenshots/menu.png)
+![Contact](screenshots/contact.png)
+![News](screenshots/news.png)
+![News Detail](screenshots/newsdetail.png)
+![Payment](screenshots/payment.png)
+![Cart](screenshots/cart.png)
 
 ---
 
